@@ -57,6 +57,13 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
+    public Product updateProduct(Product updatedProduct) {
+        log.info("Saving updated product {} to the database", updatedProduct.getEnglishTitle());
+        System.out.println(updatedProduct.getEnglishTitle());
+        return updatedProduct;
+    }
+
+    @Override
     public void addImageToProduct(Long productId, Long imageId) {
         Product product = productRepo.findById(productId)
                 .orElseThrow(

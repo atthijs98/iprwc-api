@@ -1,16 +1,12 @@
 package com.hsleiden.iprwc.api.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -36,21 +32,12 @@ public class Product {
     private String trailer;
     private Double price;
 
-//    @JsonManagedReference
-//    @Nullable
-//    @OneToMany(mappedBy = "product", cascade = CascadeType.REFRESH, orphanRemoval = true, fetch = FetchType.EAGER)
-//    List<ProductImage> productImages;
-
     @Nullable
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<ProductImage> productImages = new ArrayList<>();
 
     @Nullable
     @OneToMany()
-    private Set<ProductDirector> productDirectors;
+    private Set<ProductDirector> productDirectors = new HashSet<>();
 
-//    @JsonManagedReference
-//    @Nullable
-//    @OneToMany(mappedBy = "product", cascade = CascadeType.REFRESH, orphanRemoval = true, fetch = FetchType.EAGER)
-//    List<ProductDirector> productDirectors;
 }

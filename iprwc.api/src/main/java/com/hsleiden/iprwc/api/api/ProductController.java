@@ -29,6 +29,11 @@ public class ProductController {
         return ResponseEntity.created(uri).body(productService.saveProduct(product));
     }
 
+    @PutMapping("/admin/product/{id}")
+    public ResponseEntity<Product> updateProduct(@RequestBody @Valid Product product) {
+        return ResponseEntity.ok().body(productService.updateProduct(product));
+    }
+
     @DeleteMapping("/admin/product/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Integer id) {
         return ResponseEntity

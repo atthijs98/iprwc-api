@@ -11,6 +11,7 @@ import java.util.List;
 public interface ProductService {
     Product saveProduct(Product product);
     Product saveProduct(ProductCreateDto product);
+    Product updateProduct(Product updatedProduct);
     ProductImage saveProductImage(ProductImage productImage);
     ProductDirector saveProductDirector(ProductDirector productDirector);
     void addImageToProduct(Long productId, Long imageId);
