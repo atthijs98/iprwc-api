@@ -59,8 +59,16 @@ public class ProductServiceImplementation implements ProductService {
     @Override
     public Product updateProduct(Product updatedProduct) {
         log.info("Saving updated product {} to the database", updatedProduct.getEnglishTitle());
-        System.out.println(updatedProduct.getEnglishTitle());
-        return updatedProduct;
+        if (productRepo.findById(updatedProduct.getId()).isPresent()){
+            Product existingProduct = productRepo.findById(updatedProduct.getId()).get();
+            if (existingProduct != updatedProduct) {
+                return null;
+            } else {
+                return productRepo.save(updatedProduct);
+            }
+        }else {
+            return null;
+        }
     }
 
     @Override
