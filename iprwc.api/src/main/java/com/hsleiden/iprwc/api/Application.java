@@ -30,8 +30,8 @@ public class Application {
 			userService.saveRole(new Role(null, "ROLE_USER"));
 			userService.saveRole(new Role(null, "ROLE_ADMIN"));
 
-			userService.saveUser(new User(null, "Azariah Lynch", "azariah@gmail.com", "password", new ArrayList<Role>(), true));
-			userService.saveUser(new User(null, "Matthijs van Eijk", "matthijs@gmail.com", "password", new ArrayList<Role>(), true));
+			userService.saveUser(new User(null, "Azariah Lynch", "azariah@gmail.com", "password", new ArrayList<Role>(), null,true));
+			userService.saveUser(new User(null, "Matthijs van Eijk", "matthijs@gmail.com", "password", new ArrayList<Role>(), null,true));
 
 			userService.addRoleToUser("azariah@gmail.com", "ROLE_USER");
 			userService.addRoleToUser("matthijs@gmail.com", "ROLE_USER");
