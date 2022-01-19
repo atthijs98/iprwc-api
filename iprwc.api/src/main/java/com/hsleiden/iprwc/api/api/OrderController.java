@@ -37,7 +37,7 @@ public class OrderController {
     @PostMapping("/order")
     public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderCreateDto orderCreateDto) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/order").toUriString());
-        List<ItemDto> itemDtos = orderCreateDto.getItemDto();
+        List<ItemDto> itemDtos = orderCreateDto.getItems();
         validateProductsExistence(itemDtos);
         Order order = orderService.createOrder(orderCreateDto);
 

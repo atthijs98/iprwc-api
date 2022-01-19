@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Item {
 
@@ -21,11 +20,39 @@ public class Item {
 
     private Double total;
 
+    public Item() {
+        super();
+    }
+
     public Item(Order order, Product product, Integer amount, Double total) {
         pk = new ItemPk();
         pk.setOrder(order);
         pk.setProduct(product);
         this.amount = amount;
+        this.total = total;
+    }
+
+    public ItemPk getPk() {
+        return pk;
+    }
+
+    public void setPk(ItemPk pk) {
+        this.pk = pk;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
         this.total = total;
     }
 

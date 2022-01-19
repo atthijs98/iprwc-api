@@ -27,7 +27,7 @@ public class User implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
-    
+
     private Boolean enabled;
 
     @Override

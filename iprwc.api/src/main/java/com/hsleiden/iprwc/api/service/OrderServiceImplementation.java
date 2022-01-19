@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -25,15 +25,14 @@ public class OrderServiceImplementation implements OrderService {
     @Override
     public Order createOrder(OrderCreateDto orderCreateDto) {
         Order order = new Order();
-
         order.setOrderNumber(orderCreateDto.getOrderNumber());
         order.setAddress(orderCreateDto.getAddress());
         order.setZipcode(orderCreateDto.getZipcode());
         order.setCity(orderCreateDto.getCity());
         order.setPaymentMethod(orderCreateDto.getPaymentMethod());
         order.setTotalPrice(orderCreateDto.getTotalPrice());
-        order.setDateCreated(LocalDate.now());
-        order.setUser(orderCreateDto.getUser());
+        order.setDateCreated(LocalDateTime.now());
+        order.setUserId(orderCreateDto.getUserId());
 
         return this.orderRepo.save(order);
     }

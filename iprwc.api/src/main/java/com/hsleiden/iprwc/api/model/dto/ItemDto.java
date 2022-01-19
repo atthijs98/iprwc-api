@@ -9,13 +9,8 @@ public class ItemDto {
     private Integer amount;
     private Double total;
     private Product product;
-    private User user;
 
     public Product getProduct() {
         return product;
-    }
-
-    public User getUser() {
-        return user;
     }
 }
