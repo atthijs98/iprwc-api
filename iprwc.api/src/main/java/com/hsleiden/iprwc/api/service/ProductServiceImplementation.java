@@ -1,6 +1,5 @@
 package com.hsleiden.iprwc.api.service;
 
-import com.hsleiden.iprwc.api.exception.UnAuthorizedException;
 import com.hsleiden.iprwc.api.model.*;
 import com.hsleiden.iprwc.api.model.dto.ProductCreateDto;
 import com.hsleiden.iprwc.api.model.dto.ProductDirectorCreateDto;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -154,9 +152,17 @@ public class ProductServiceImplementation implements ProductService {
         return productRepo.save(createdProduct);
     }
 
+    @Override
     public Product find(Integer id) {
         return productRepo
                 .findById(id.longValue())
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public Product find(Long id) {
+        return productRepo
+                .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
     }
 

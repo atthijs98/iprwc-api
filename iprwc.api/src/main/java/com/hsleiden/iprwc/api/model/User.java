@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,6 +27,9 @@ public class User implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy="user")
+    private Set<Order> orders;
 
     private Boolean enabled;
 
