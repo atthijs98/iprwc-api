@@ -11,10 +11,7 @@ import com.hsleiden.iprwc.api.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -31,6 +28,11 @@ public class OrderController {
     private final OrderService orderService;
     private final ProductService productService;
     private final ItemService itemService;
+
+    @GetMapping("/order")
+    public ResponseEntity<Iterable<Order>> getAllOrders() {
+        return ResponseEntity.ok().body(orderService.getAllOrders());
+    }
 
     @PostMapping("/order")
     public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderCreateDto orderCreateDto) {
