@@ -27,10 +27,7 @@ public class User implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
-
-    @OneToMany(mappedBy="user")
-    private Set<Order> orders;
-
+    
     private Boolean enabled;
 
     @Override
