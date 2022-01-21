@@ -1,6 +1,7 @@
 package com.hsleiden.iprwc.api.service;
 
 import com.hsleiden.iprwc.api.model.Order;
+import com.hsleiden.iprwc.api.model.User;
 import com.hsleiden.iprwc.api.model.dto.OrderCreateDto;
 import com.hsleiden.iprwc.api.repo.OrderRepo;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class OrderServiceImplementation implements OrderService {
     private final OrderRepo orderRepo;
+    private final UserService userService;
 
     @Override
     public Iterable<Order> getAllOrders() {
@@ -35,6 +37,16 @@ public class OrderServiceImplementation implements OrderService {
         order.setUserId(orderCreateDto.getUserId());
 
         return this.orderRepo.save(order);
+    }
+
+    @Override
+    public Iterable<Order> getUserOrders() {
+        Long id = this.userService.findLoggedInUser().getId();
+        if(this.orderRepo.findByUserId(id).isPresent()) {
+            return this.orderRepo.findByUserId(id).get();
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -14,6 +14,7 @@ public interface UserService {
     User saveUser(User user);
     Role saveRole(Role role);
     void addRoleToUser(String username, String roleName);
+    User findLoggedInUser();
     User getUser(String username);
     List<User> getUsers();
     void deleteUser(String username);

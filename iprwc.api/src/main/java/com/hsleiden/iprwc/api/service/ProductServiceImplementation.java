@@ -111,7 +111,7 @@ public class ProductServiceImplementation implements ProductService {
         product.setYear(productCreateDto.getYear());
         product.setRuntime(productCreateDto.getRuntime());
         product.setPlot(productCreateDto.getPlot());
-        product.setPoster(productCreateDto.getPlot());
+        product.setPoster(productCreateDto.getPoster());
         product.setTrailer(productCreateDto.getTrailer());
         product.setPrice(productCreateDto.getPrice());
 

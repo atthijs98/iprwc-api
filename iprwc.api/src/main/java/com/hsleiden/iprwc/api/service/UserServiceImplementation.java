@@ -129,6 +129,9 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     private boolean checkIfOldPasswordIsCorrect(String oldPassword, User user) {
+        System.out.println(oldPassword);
+        System.out.println(passwordEncoder.encode(oldPassword));
+        System.out.println(user.getPassword());
         return passwordEncoder.encode(oldPassword).equals(user.getPassword());
     }
 
@@ -136,6 +139,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         return passwordEncoder.encode(newPassword).equals(user.getPassword());
     }
 
+    @Override
     public User findLoggedInUser() throws UsernameNotFoundException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();

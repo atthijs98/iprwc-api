@@ -34,6 +34,11 @@ public class OrderController {
         return ResponseEntity.ok().body(orderService.getAllOrders());
     }
 
+    @GetMapping("/order/me")
+    public ResponseEntity<Iterable<Order>> getOrdersByUser() {
+        return ResponseEntity.ok().body(orderService.getUserOrders());
+    }
+
     @PostMapping("/order")
     public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderCreateDto orderCreateDto) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/order").toUriString());
