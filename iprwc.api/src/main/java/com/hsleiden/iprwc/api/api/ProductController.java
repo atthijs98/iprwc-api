@@ -40,4 +40,18 @@ public class ProductController {
                 .ok()
                 .body(productService.deleteIfExists(id));
     }
+
+    @DeleteMapping("/admin/productImage/{id}")
+    public ResponseEntity<String> deleteImageById(@PathVariable("id") Integer id) {
+        return ResponseEntity
+                .ok()
+                .body(productService.deleteImageIfExists(id));
+    }
+
+    @DeleteMapping("/admin/productDirector/{id}")
+    public ResponseEntity<String> deleteDirectorById(@PathVariable("id") Integer id) {
+        return ResponseEntity
+                .ok()
+                .body(productService.deleteDirectorIfExists(id));
+    }
 }

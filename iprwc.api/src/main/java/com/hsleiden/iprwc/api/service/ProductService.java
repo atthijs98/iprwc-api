@@ -18,5 +18,7 @@ public interface ProductService {
     void addImageToProduct(Long productId, Long imageId);
     void addDirectorToProduct(Long productId, Long directorId);
     String deleteIfExists(Integer id);
+    String deleteImageIfExists(Integer id);
+    String deleteDirectorIfExists(Integer id);
     List<Product> findAll();
 }

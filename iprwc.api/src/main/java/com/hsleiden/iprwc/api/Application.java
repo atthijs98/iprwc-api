@@ -36,7 +36,7 @@ public class Application {
 //			userService.addRoleToUser("azariah@gmail.com", "ROLE_USER");
 //			userService.addRoleToUser("matthijs@gmail.com", "ROLE_USER");
 //			userService.addRoleToUser("matthijs@gmail.com", "ROLE_ADMIN");
-//
+
 //			ProductImage image = productService.saveProductImage(new ProductImage(null, "https://criterion-production.s3.amazonaws.com/carousel-files/f7600f81bf5d789361dd7945c5082ae7.jpeg", "family"));
 //			ProductDirector director= productService.saveProductDirector(new ProductDirector(null, "Bong Joon Ho"));
 //

@@ -33,11 +33,11 @@ public class Product {
     private Double price;
 
     @Nullable
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<ProductImage> productImages = new ArrayList<>();
 
     @Nullable
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<ProductDirector> productDirectors = new HashSet<>();
 
 }

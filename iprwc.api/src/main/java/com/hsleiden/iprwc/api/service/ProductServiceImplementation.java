@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,15 +60,45 @@ public class ProductServiceImplementation implements ProductService {
         log.info("Saving updated product {} to the database", updatedProduct.getEnglishTitle());
         if (productRepo.findById(updatedProduct.getId()).isPresent()){
             Product existingProduct = productRepo.findById(updatedProduct.getId()).get();
-            if (existingProduct != updatedProduct) {
-                return null;
+            if (existingProduct == updatedProduct) {
+                return existingProduct;
             } else {
-                return productRepo.save(updatedProduct);
+                Product newProduct = productRepo.save(updatedProduct);
+                Collection<ProductImage> images = updatedProduct.getProductImages();
+                if (images != null & !images.isEmpty()) {
+                    images.forEach(index -> {
+                        if (index.getId() == null) {
+                            ProductImage image = new ProductImage();
+                            image.setDescription(index.getDescription());
+                            image.setPath(index.getPath());
+                            assert newProduct.getProductImages() != null;
+                            newProduct.getProductImages().add(
+                                    productImageRepo.save(image)
+                            );
+                        }
+                    });
+                }
+
+                Collection<ProductDirector> directors = updatedProduct.getProductDirectors();
+                if (directors != null & !directors.isEmpty()) {
+                    directors.forEach(index -> {
+                        if (index.getId() == null) {
+                            ProductDirector director = new ProductDirector();
+                            director.setName(index.getName());
+                            assert newProduct.getProductDirectors() != null;
+                            newProduct.getProductDirectors().add(
+                                    productDirectorRepo.save(director)
+                            );
+                        }
+                    });
+                }
+                return productRepo.save(newProduct);
             }
         }else {
             return null;
         }
     }
+
 
     @Override
     public void addImageToProduct(Long productId, Long imageId) {
@@ -99,6 +130,7 @@ public class ProductServiceImplementation implements ProductService {
         assert product.getProductDirectors() != null;
         product.getProductDirectors().add(director);
     }
+
 
     @Override
     public Product saveProduct(ProductCreateDto productCreateDto) {
@@ -171,6 +203,20 @@ public class ProductServiceImplementation implements ProductService {
         Optional<Product> product = productRepo.findById(id.longValue());
         product.ifPresent(productRepo::delete);
         return "Product successfully deleted";
+    }
+
+    @Override
+    public String deleteImageIfExists(Integer id) {
+        Optional<ProductImage> productImage = productImageRepo.findById(id.longValue());
+        productImage.ifPresent(productImageRepo::delete);
+        return "Product image successfully deleted";
+    }
+
+    @Override
+    public String deleteDirectorIfExists(Integer id) {
+        Optional<ProductDirector> productDirector = productDirectorRepo.findById(id.longValue());
+        productDirector.ifPresent(productDirectorRepo::delete);
+        return "Product director successfully deleted";
     }
 }
 
